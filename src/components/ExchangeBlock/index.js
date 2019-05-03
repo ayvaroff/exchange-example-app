@@ -9,6 +9,7 @@ const ExchangeBlock = ({
   exchangeConverted,
   exchangeFrom,
   exchangeTo,
+  makeConvertion,
   onInputChange,
   pockets,
   setExchangeFrom,
@@ -28,6 +29,13 @@ const ExchangeBlock = ({
       selected={exchangeTo}
       value={exchangeConverted}
     />
+    <button
+      onClick={makeConvertion}
+      type="button"
+    >
+      Exchange
+    </button>
+    &#8645;
   </div>
 )
 
@@ -36,6 +44,7 @@ ExchangeBlock.propTypes = {
   exchangeConverted: PropTypes.number,
   exchangeFrom: PropTypes.string,
   exchangeTo: PropTypes.string,
+  makeConvertion: PropTypes.func,
   onInputChange: PropTypes.func,
   pockets: PropTypes.object,
   setExchangeFrom: PropTypes.func,

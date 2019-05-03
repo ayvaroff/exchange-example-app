@@ -15,7 +15,7 @@ class CurrencyInput extends Component {
 
   handleChange = e => {
     const { onChange } = this.props
-    const value = Math.abs(e.floatValue)
+    const value = Math.abs(e.floatValue) || 0
     onChange && onChange(value)
   }
 

@@ -5,13 +5,16 @@ import {
   put,
 } from 'redux-saga/effects'
 import {
+  makeConvertion,
   setExchangeFrom,
   setExchangeTo,
   updateExchangeAmount,
   updateExchangeConverted,
+  updatePocket,
 } from 'store/actions'
 import {
   fromExchange,
+  fromPocket,
   fromRates,
 } from 'store/selectors'
 import { getLatesRates } from 'store/rates/sagas'
@@ -39,6 +42,24 @@ function* refreshRates() {
   yield call(calculateExchangeAmounts)
 }
 
+function* makeValuesConvertion() {
+  const pockets = yield select(fromPocket.getPockets)
+  const {
+    exchangeAmount,
+    exchangeConverted,
+    exchangeFrom,
+    exchangeTo,
+  } = yield select(fromExchange.getExchange)
+
+  const newValueFrom = pockets[exchangeFrom] - exchangeAmount
+  const newValueTo = pockets[exchangeTo] + exchangeConverted
+
+  yield put(updatePocket({
+    [exchangeFrom]: newValueFrom,
+    [exchangeTo]: newValueTo,
+  }))
+}
+
 export function* watchExchangeParams() {
   while (true) {
     const action = yield take(setExchangeFrom)
@@ -53,7 +74,15 @@ export function* watchRefreshRates() {
   }
 }
 
+export function* watchMakeValuesConvertion() {
+  while (true) {
+    const action = yield take(makeConvertion)
+    yield call(makeValuesConvertion, action)
+  }
+}
+
 export default [
   watchExchangeParams,
+  watchMakeValuesConvertion,
   watchRefreshRates,
 ]

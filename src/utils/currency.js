@@ -28,5 +28,6 @@ export const convert = ({
   to
 }, rates) => {
   const preparedFx = prepareFX(rates)
-  return preparedFx ? preparedFx.convert(amount, { from, to }) : 0
+  const convertedValue = preparedFx ? preparedFx.convert(amount, { from, to }).toFixed(2) : 0
+  return parseFloat(convertedValue)
 }

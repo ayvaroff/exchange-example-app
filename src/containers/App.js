@@ -8,6 +8,7 @@ import {
   fromPocket,
 } from 'store/selectors'
 import {
+  makeConvertion,
   requestRates,
   setExchangeFrom,
   setExchangeTo,
@@ -63,6 +64,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  makeConvertion: () => dispatch(makeConvertion()),
   updateExchangeAmount: value => dispatch(updateExchangeAmount(value)),
   requestRates: () => dispatch(requestRates()),
   setExchangeFrom: value => dispatch(setExchangeFrom(value)),

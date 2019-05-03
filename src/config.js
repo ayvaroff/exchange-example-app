@@ -6,6 +6,7 @@ export default {
     'USD',
     'EUR',
     'GBP',
+    'RUB',
   ],
   refreshRate: 10000,
 }

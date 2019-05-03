@@ -3,9 +3,9 @@ import { updatePocket } from './actions'
 import initialState from './selectors'
 
 const reducer = handleActions({
-  [updatePocket]: (state, { payload: { pocket, value } }) => ({
+  [updatePocket]: (state, { payload }) => ({
     ...state,
-    [pocket]: value,
+    ...payload,
   })
 }, initialState)
 

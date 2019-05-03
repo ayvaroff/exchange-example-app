@@ -1,10 +1,15 @@
+const path = require('path')
+
 module.exports = {
   entry: [
     '@babel/polyfill',
     './src/index',
   ],
   resolve: {
-    modules: ['src', 'node_modules'],
+    modules: [
+      path.resolve(__dirname, '../src'),
+      'node_modules',
+    ],
   },
   module: {
     rules: [

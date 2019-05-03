@@ -21,6 +21,8 @@ import ExchangeBlock from 'components/ExchangeBlock'
 class App extends Component {
   static propTypes = {
     requestRates: PropTypes.func,
+    setExchangeFrom: PropTypes.func,
+    setExchangeTo: PropTypes.func,
     updateExchangeAmount: PropTypes.func,
   }
 
@@ -41,6 +43,18 @@ class App extends Component {
     updateExchangeAmount(value)
   }
 
+  handleToggleChange = (e, from) => {
+    const {
+      setExchangeFrom,
+      setExchangeTo,
+    } = this.props
+    const {
+      target: { value }
+    } = e
+
+    from ? setExchangeFrom(value) : setExchangeTo(value)
+  }
+
   render() {
     const {
       requestRates,
@@ -48,11 +62,14 @@ class App extends Component {
     } = this.props
 
     return (
-      <div>
-        <ExchangeBlock
-          onInputChange={this.handleInputChange}
-          {...{ ...rest }}
-        />
+      <div className="exchange-widget">
+        <div className="exchange-widget-wrapper">
+          <ExchangeBlock
+            onInputChange={this.handleInputChange}
+            onToggleChange={this.handleToggleChange}
+            {...{ ...rest }}
+          />
+        </div>
       </div>
     )
   }

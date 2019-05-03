@@ -1,0 +1,49 @@
+.exchange-block {
+  background-color: #fff;
+  color: #060407;
+  position: relative;
+
+  &-btn,
+  &-arrows {
+    position: absolute;
+  }
+
+  &-arrows {
+    background-color: #fff;
+    border: 2px solid #f7f6f7;
+    border-radius: 20px;
+    color: #2c5ca8;
+    font-weight: bold;
+    font-size: 1.7rem;
+    line-height: 40px;
+    left: .7em;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  &-btn {
+    color: #fff;
+    cursor: pointer;
+    background-color: #eb008d;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 24px 32px rgba(0,0,0,.15);
+    left: 50%;
+    bottom: -25px;
+    outline: none;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 50px;
+
+    &:hover {
+      background-color: #d2007e;
+    }
+  }
+
+  &-to {
+    background-color: #f5f6f7;
+  }
+}

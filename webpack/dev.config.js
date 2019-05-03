@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const globImporter = require('node-sass-glob-importer');
 const baseConfig = require('./base.config.js')
 
 module.exports = merge(baseConfig, {
@@ -9,11 +10,17 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        enforce: 'pre',
+        use: [{
+          loader: 'style-loader',
+        }, {
+          loader: 'css-loader',
+        }, {
+          loader: 'sass-loader',
+          options: {
+            importer: globImporter()
+          }
+        }]
       },
       {
         test: /\.(png|jpg|gif)$/,

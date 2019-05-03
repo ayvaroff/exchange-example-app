@@ -6,6 +6,8 @@ import configureStore from './store'
 
 import App from './containers/App'
 
+import './styles/index.scss'
+
 const store = configureStore()
 
 ReactDOM.render(

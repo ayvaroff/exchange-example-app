@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ExchangeFrom from 'components/ExchangeFrom'
-import ExchangeTo from 'components/ExchangeTo'
+import ExchangeBlockPart from 'components/ExchangeBlockPart'
 import ExchangeInfo from 'components/ExchangeInfo'
 
 const ExchangeBlock = ({
@@ -12,22 +11,25 @@ const ExchangeBlock = ({
   exchangeTo,
   makeConvertion,
   onInputChange,
+  onToggleChange,
   pockets,
   rate,
-  setExchangeFrom,
-  setExchangeTo,
 }) => (
-  <div className="exchange">
-    <ExchangeFrom
+  <div className="exchange-block">
+    <ExchangeBlockPart
       onInputChange={onInputChange}
-      onToggleClick={setExchangeFrom}
+      onToggleChange={e => onToggleChange(e, true)}
       pockets={pockets}
+      prefix="-"
       selected={exchangeFrom}
       value={exchangeAmount}
     />
-    <ExchangeTo
-      onToggleClick={setExchangeTo}
+    <ExchangeBlockPart
+      className="exchange-block-to"
+      onToggleChange={e => onToggleChange(e, false)}
       pockets={pockets}
+      prefix="+"
+      readOnly
       selected={exchangeTo}
       value={exchangeConverted}
     />
@@ -36,13 +38,16 @@ const ExchangeBlock = ({
       exchangeTo={exchangeTo}
       rate={rate}
     />
+    <span className="exchange-block-arrows">
+      &#8645;
+    </span>
     <button
+      className="exchange-block-btn"
       onClick={makeConvertion}
       type="button"
     >
       Exchange
     </button>
-    &#8645;
   </div>
 )
 
@@ -52,11 +57,10 @@ ExchangeBlock.propTypes = {
   exchangeFrom: PropTypes.string,
   exchangeTo: PropTypes.string,
   makeConvertion: PropTypes.func,
+  onToggleChange: PropTypes.func,
   onInputChange: PropTypes.func,
   pockets: PropTypes.object,
   rate: PropTypes.number,
-  setExchangeFrom: PropTypes.func,
-  setExchangeTo: PropTypes.func,
 }
 
 export default ExchangeBlock

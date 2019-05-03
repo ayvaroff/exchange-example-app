@@ -29,6 +29,8 @@ class CurrencyInput extends Component {
     return (
       <CurrencyFormat
         allowNegative={false}
+        autofocus={readOnly ? '' : 'true'}
+        className="currency-input"
         decimalScale={2}
         displayType={readOnly ? 'text' : 'input'}
         onValueChange={this.handleChange}

@@ -1,15 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {
-  buildCurrencyString,
-  getNumeral,
-  isCurrency,
-} from 'utils/currency'
+import CurrencyFormat from 'react-currency-format'
 
-class CurrencyInput extends PureComponent {
+class CurrencyInput extends Component {
   static propTypes = {
     onChange: PropTypes.func,
-    placeholder: PropTypes.string,
     prefix: PropTypes.string,
     readOnly: PropTypes.bool,
     value: PropTypes.oneOfType([
@@ -19,30 +14,27 @@ class CurrencyInput extends PureComponent {
   }
 
   handleChange = e => {
-    const { onChange, prefix } = this.props
-    const value = e.currentTarget.value.replace(prefix, '')
-
-    if (isCurrency(value) && onChange) {
-      const numValue = getNumeral(value).value()
-      onChange(numValue)
-    }
+    const { onChange } = this.props
+    const value = Math.abs(e.floatValue)
+    onChange && onChange(value)
   }
 
   render() {
     const {
-      placeholder,
       prefix = '',
       readOnly = false,
       value,
     } = this.props
-    const inputValue = value ? `${prefix}${buildCurrencyString(value)}` : ''
 
     return (
-      <input
-        onChange={this.handleChange}
-        placeholder={placeholder}
-        value={inputValue}
-        readOnly={readOnly}
+      <CurrencyFormat
+        allowNegative={false}
+        decimalScale={2}
+        displayType={readOnly ? 'text' : 'input'}
+        onValueChange={this.handleChange}
+        prefix={prefix}
+        thousandSeparator
+        value={value || ''}
       />
     )
   }

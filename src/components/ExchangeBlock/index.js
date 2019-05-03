@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ExchangeBlockPart from 'components/ExchangeBlockPart'
-import ExchangeInfo from 'components/ExchangeInfo'
+import {
+  ExchangeBlockPart,
+  ExchangeInfo,
+} from 'components'
 
 const ExchangeBlock = ({
   amount,

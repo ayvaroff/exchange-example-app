@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 
 import { getCurrencySymbol } from 'utils/currency'
-
-import CurrencyInput from 'components/CurrencyInput'
-import CurrencyToggle from 'components/CurrencyToggle'
+import {
+  CurrencyInput,
+  CurrencyToggle,
+} from 'components'
 
 const ExchangeFrom = ({
   className,

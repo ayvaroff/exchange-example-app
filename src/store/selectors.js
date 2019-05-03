@@ -1,6 +1,6 @@
 const upperFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
-const req = require.context('.', true, /\.\/(?!__mock__).+\/selectors\.js$/)
+const req = require.context('.', true, /\.\/.+\/selectors\.js$/)
 
 req.keys().forEach(key => {
   const storeName = key.replace(/\.\/(.+)\/.+$/, '$1')

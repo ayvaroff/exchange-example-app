@@ -15,8 +15,7 @@ import {
   setExchangeTo,
   updateExchangeAmount,
 } from 'store/actions'
-
-import ExchangeBlock from 'components/ExchangeBlock'
+import { ExchangeBlock } from 'components'
 
 class App extends Component {
   static propTypes = {

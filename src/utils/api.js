@@ -11,10 +11,6 @@ const apiInstance = axios.create({
   baseURL: baseUrl,
 })
 
-const withRequest = options => {
-  return apiInstance.request({ ...options })
-}
-
-const api = options => withRequest({ ...options })
+const api = options => apiInstance.request({ ...options })
 
 export default api

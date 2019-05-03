@@ -1,26 +1,20 @@
 import {
   take,
-  takeEvery,
-  race,
-  cancelled,
-  takeLatest,
   put,
   call,
   select,
-  all,
 } from 'redux-saga/effects'
+import { fromExchange } from 'store/selectors'
 import * as api from 'services/rates'
-import { updateRates, requestRates } from 'redux/actions'
+import { updateRates, requestRates } from 'store/actions'
 
 function* requestLatestRates(currency) {
   const { data } = yield call(api.getLatest, currency)
   return data
 }
 
-function* getLatesRates() {
-  // get currency from store
-  const currency = 'USD'
-
+export function* getLatesRates() {
+  const currency = yield select(fromExchange.getExchangeFrom)
   const rates = yield call(requestLatestRates, currency)
   yield put(updateRates(rates))
 }

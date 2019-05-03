@@ -3,12 +3,7 @@ import {
   requestRates,
   updateRates,
 } from './actions'
-
-const initialState = {
-  base: 'USD',
-  rates: {},
-  loading: false
-}
+import initialState from './selectors'
 
 const reducer = handleActions({
   [requestRates]: (state) => ({

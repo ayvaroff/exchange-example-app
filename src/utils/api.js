@@ -4,7 +4,6 @@ import config from 'config'
 const {
   api: {
     baseUrl,
-    appId,
   }
 } = config
 
@@ -13,14 +12,7 @@ const apiInstance = axios.create({
 })
 
 const withRequest = options => {
-  const { params } = options
-  return apiInstance.request({
-    ...options,
-    params: {
-      ...params,
-      app_id: appId,
-    }
-  })
+  return apiInstance.request({ ...options })
 }
 
 const api = options => withRequest({ ...options })

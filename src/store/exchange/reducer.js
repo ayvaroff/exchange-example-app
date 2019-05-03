@@ -3,6 +3,7 @@ import {
   setExchangeFrom,
   setExchangeTo,
   updateExchangeAmount,
+  updateExchangeConverted,
 } from './actions'
 import initialState from './selectors'
 
@@ -17,7 +18,11 @@ const reducer = handleActions({
   }),
   [updateExchangeAmount]: (state, { payload }) => ({
     ...state,
-    amount: payload,
+    amount: payload
+  }),
+  [updateExchangeConverted]: (state, { payload }) => ({
+    ...state,
+    converted: payload
   })
 }, initialState)
 

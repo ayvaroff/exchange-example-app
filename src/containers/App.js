@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import numeral from 'numeral'
+import config from 'config'
 
 import {
   fromExchange,
@@ -11,8 +11,8 @@ import {
   requestRates,
   setExchangeFrom,
   setExchangeTo,
+  updateExchangeAmount,
 } from 'store/actions'
-import { isCurrency } from 'utils/currency'
 
 import ExchangeBlock from 'components/ExchangeBlock'
 
@@ -20,26 +20,24 @@ class App extends Component {
   static propTypes = {
     pockets: PropTypes.object,
     requestRates: PropTypes.func,
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      amount: numeral(10043.07).format('$0,0.00')
-    }
+    updateExchangeAmount: PropTypes.func,
   }
 
   componentDidMount() {
     const { requestRates } = this.props
+    const { refreshRate } = config
+
     requestRates()
+    window.setInterval(() => requestRates(), refreshRate)
   }
 
-  handleInputChange = e => {
-    const value = e.currentTarget.value.replace('-', '')
-    if (!isCurrency(value)) return
+  componentWillUnmount() {
+    clearInterval()
+  }
 
-    this.setState({ amount: numeral(value).format('$0,0.00') })
+  handleInputChange = value => {
+    const { updateExchangeAmount } = this.props
+    updateExchangeAmount(value)
   }
 
   render() {
@@ -50,7 +48,10 @@ class App extends Component {
 
     return (
       <div>
-        <ExchangeBlock {...{ ...rest }} />
+        <ExchangeBlock
+          onInputChange={this.handleInputChange}
+          {...{ ...rest }}
+        />
       </div>
     )
   }
@@ -62,6 +63,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  updateExchangeAmount: value => dispatch(updateExchangeAmount(value)),
   requestRates: () => dispatch(requestRates()),
   setExchangeFrom: value => dispatch(setExchangeFrom(value)),
   setExchangeTo: value => dispatch(setExchangeTo(value)),

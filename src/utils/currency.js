@@ -25,9 +25,10 @@ export const isCurrency = value => /^(?=.*\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|0)?(\.
 export const convert = ({
   amount,
   from,
-  to
+  to,
+  fixed = 2,
 }, rates) => {
   const preparedFx = prepareFX(rates)
-  const convertedValue = preparedFx ? preparedFx.convert(amount, { from, to }).toFixed(2) : 0
+  const convertedValue = preparedFx ? preparedFx.convert(amount, { from, to }).toFixed(fixed) : 0
   return parseFloat(convertedValue)
 }

@@ -6,6 +6,7 @@ import config from 'config'
 import {
   fromExchange,
   fromPocket,
+  fromRates,
 } from 'store/selectors'
 import {
   makeConvertion,
@@ -19,7 +20,6 @@ import ExchangeBlock from 'components/ExchangeBlock'
 
 class App extends Component {
   static propTypes = {
-    pockets: PropTypes.object,
     requestRates: PropTypes.func,
     updateExchangeAmount: PropTypes.func,
   }
@@ -60,6 +60,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   pockets: fromPocket.getPockets(state),
+  rate: fromRates.getCurrentRate(state),
   ...fromExchange.getExchange(state),
 })
 

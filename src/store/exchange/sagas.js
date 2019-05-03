@@ -17,7 +17,10 @@ import {
   fromPocket,
   fromRates,
 } from 'store/selectors'
-import { getLatesRates } from 'store/rates/sagas'
+import {
+  calculateCurrentRate,
+  getLatesRates,
+} from 'store/rates/sagas'
 import { convert } from 'utils/currency'
 
 function* calculateExchangeAmounts() {
@@ -35,6 +38,7 @@ function* calculateExchangeAmounts() {
   }, ratesInfo)
 
   yield put(updateExchangeConverted(convertedAmount))
+  yield call(calculateCurrentRate)
 }
 
 function* refreshRates() {

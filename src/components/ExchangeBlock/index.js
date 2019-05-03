@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import ExchangeFrom from 'components/ExchangeFrom'
 import ExchangeTo from 'components/ExchangeTo'
+import ExchangeInfo from 'components/ExchangeInfo'
 
 const ExchangeBlock = ({
   exchangeAmount,
@@ -12,6 +13,7 @@ const ExchangeBlock = ({
   makeConvertion,
   onInputChange,
   pockets,
+  rate,
   setExchangeFrom,
   setExchangeTo,
 }) => (
@@ -28,6 +30,11 @@ const ExchangeBlock = ({
       pockets={pockets}
       selected={exchangeTo}
       value={exchangeConverted}
+    />
+    <ExchangeInfo
+      exchangeFrom={exchangeFrom}
+      exchangeTo={exchangeTo}
+      rate={rate}
     />
     <button
       onClick={makeConvertion}
@@ -47,6 +54,7 @@ ExchangeBlock.propTypes = {
   makeConvertion: PropTypes.func,
   onInputChange: PropTypes.func,
   pockets: PropTypes.object,
+  rate: PropTypes.number,
   setExchangeFrom: PropTypes.func,
   setExchangeTo: PropTypes.func,
 }

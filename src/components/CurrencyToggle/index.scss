@@ -1,10 +1,14 @@
 .currency-toggle {
-  margin-left: -.5rem;
-
   select {
     border: none;
     background: transparent;
     cursor: pointer;
     outline: none;
+    -webkit-appearance:none;
+
+    &:hover {
+      color: #fff;
+      background-color: #eb008d;
+    }
   }
 }

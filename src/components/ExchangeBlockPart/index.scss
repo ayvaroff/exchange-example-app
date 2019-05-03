@@ -3,6 +3,7 @@
 
   &-controls {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     font-size: 1.8rem;
     margin-bottom: .7rem;
@@ -11,6 +12,7 @@
       border: none;
       outline: none;
       text-align: right;
+      width: 100%;
     }
   }
 

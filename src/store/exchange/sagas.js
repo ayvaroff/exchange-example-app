@@ -27,9 +27,9 @@ import {
   formatValue,
 } from 'utils/currency'
 
-function* checkExchangeError({ amount, from }) {
+function* checkExchangeError({ amount, from, to }) {
   const currentPocketValue = yield select(fromPocket.getCurrentPocket, from)
-  const error = (currentPocketValue - amount) < 0
+  const error = (currentPocketValue - amount) < 0 || from === to
 
   yield put(updateExchangeError(error))
 }
@@ -49,7 +49,7 @@ function* calculateExchangeAmounts() {
   }, ratesInfo)
 
   yield put(updateExchangeConverted(convertedAmount))
-  yield call(checkExchangeError, ({ amount, from }))
+  yield call(checkExchangeError, ({ amount, from, to }))
   yield call(calculateCurrentRate)
 }
 
@@ -77,7 +77,7 @@ function* makeValuesConvertion() {
     }))
   }
 
-  yield call(checkExchangeError, ({ amount, from }))
+  yield call(checkExchangeError, ({ amount, from, to }))
 }
 
 export function* watchExchangeParams() {

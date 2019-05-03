@@ -29,7 +29,7 @@ class CurrencyInput extends Component {
     return (
       <CurrencyFormat
         allowNegative={false}
-        autoFocus={readOnly}
+        autoFocus={!readOnly}
         className="currency-input"
         decimalScale={2}
         displayType={readOnly ? 'text' : 'input'}

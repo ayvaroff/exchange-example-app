@@ -24,15 +24,15 @@ function* requestLatestRates(currency) {
 export function* calculateCurrentRate() {
   const ratesInfo = yield select(fromRates.getRatesInfo)
   const {
-    exchangeFrom,
-    exchangeTo,
-  } = yield select(fromExchange.getExchange)
+    from,
+    to,
+  } = yield select(fromExchange.getExchangeInfo)
 
   const currentRate = convert({
     amount: 1,
     fixed: 4,
-    from: exchangeTo,
-    to: exchangeFrom,
+    from: to,
+    to: from,
   }, ratesInfo)
 
   yield put(updateCurrentRate(currentRate))

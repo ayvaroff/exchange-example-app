@@ -41,6 +41,11 @@
     &:hover {
       background-color: #d2007e;
     }
+
+    &:disabled {
+      background-color: #b8b9be;
+      color: #060407;
+    }
   }
 
   &-to {

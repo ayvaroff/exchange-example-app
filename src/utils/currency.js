@@ -32,3 +32,5 @@ export const convert = ({
   const convertedValue = preparedFx ? preparedFx.convert(amount, { from, to }).toFixed(fixed) : 0
   return parseFloat(convertedValue)
 }
+
+export const formatValue = value => parseFloat(value.toFixed(2))

@@ -5,10 +5,11 @@ import ExchangeBlockPart from 'components/ExchangeBlockPart'
 import ExchangeInfo from 'components/ExchangeInfo'
 
 const ExchangeBlock = ({
-  exchangeAmount,
-  exchangeConverted,
-  exchangeFrom,
-  exchangeTo,
+  amount,
+  converted,
+  error,
+  from,
+  to,
   makeConvertion,
   onInputChange,
   onToggleChange,
@@ -21,8 +22,8 @@ const ExchangeBlock = ({
       onToggleChange={e => onToggleChange(e, true)}
       pockets={pockets}
       prefix="-"
-      selected={exchangeFrom}
-      value={exchangeAmount}
+      selected={from}
+      value={amount}
     />
     <ExchangeBlockPart
       className="exchange-block-to"
@@ -30,12 +31,12 @@ const ExchangeBlock = ({
       pockets={pockets}
       prefix="+"
       readOnly
-      selected={exchangeTo}
-      value={exchangeConverted}
+      selected={to}
+      value={converted}
     />
     <ExchangeInfo
-      exchangeFrom={exchangeFrom}
-      exchangeTo={exchangeTo}
+      exchangeFrom={from}
+      exchangeTo={to}
       rate={rate}
     />
     <span className="exchange-block-arrows">
@@ -45,6 +46,7 @@ const ExchangeBlock = ({
       className="exchange-block-btn"
       onClick={makeConvertion}
       type="button"
+      disabled={error}
     >
       Exchange
     </button>
@@ -52,10 +54,11 @@ const ExchangeBlock = ({
 )
 
 ExchangeBlock.propTypes = {
-  exchangeAmount: PropTypes.number,
-  exchangeConverted: PropTypes.number,
-  exchangeFrom: PropTypes.string,
-  exchangeTo: PropTypes.string,
+  amount: PropTypes.number,
+  converted: PropTypes.number,
+  error: PropTypes.bool,
+  from: PropTypes.string,
+  to: PropTypes.string,
   makeConvertion: PropTypes.func,
   onToggleChange: PropTypes.func,
   onInputChange: PropTypes.func,

@@ -10,6 +10,7 @@ import {
   setExchangeTo,
   updateExchangeAmount,
   updateExchangeConverted,
+  updateExchangeError,
   updatePocket,
 } from 'store/actions'
 import {
@@ -21,23 +22,34 @@ import {
   calculateCurrentRate,
   getLatesRates,
 } from 'store/rates/sagas'
-import { convert } from 'utils/currency'
+import {
+  convert,
+  formatValue,
+} from 'utils/currency'
+
+function* checkExchangeError({ amount, from }) {
+  const currentPocketValue = yield select(fromPocket.getCurrentPocket, from)
+  const error = (currentPocketValue - amount) < 0
+
+  yield put(updateExchangeError(error))
+}
 
 function* calculateExchangeAmounts() {
   const ratesInfo = yield select(fromRates.getRatesInfo)
   const {
-    exchangeAmount,
-    exchangeFrom,
-    exchangeTo,
-  } = yield select(fromExchange.getExchange)
+    amount,
+    from,
+    to,
+  } = yield select(fromExchange.getExchangeInfo)
 
   const convertedAmount = convert({
-    amount: exchangeAmount,
-    from: exchangeFrom,
-    to: exchangeTo,
+    amount,
+    from,
+    to,
   }, ratesInfo)
 
   yield put(updateExchangeConverted(convertedAmount))
+  yield call(checkExchangeError, ({ amount, from }))
   yield call(calculateCurrentRate)
 }
 
@@ -49,19 +61,23 @@ function* refreshRates() {
 function* makeValuesConvertion() {
   const pockets = yield select(fromPocket.getPockets)
   const {
-    exchangeAmount,
-    exchangeConverted,
-    exchangeFrom,
-    exchangeTo,
-  } = yield select(fromExchange.getExchange)
+    amount,
+    converted,
+    from,
+    to,
+  } = yield select(fromExchange.getExchangeInfo)
 
-  const newValueFrom = pockets[exchangeFrom] - exchangeAmount
-  const newValueTo = pockets[exchangeTo] + exchangeConverted
+  const newValueFrom = formatValue(pockets[from] - amount)
+  const newValueTo = formatValue(pockets[to] + converted)
 
-  yield put(updatePocket({
-    [exchangeFrom]: newValueFrom,
-    [exchangeTo]: newValueTo,
-  }))
+  if (newValueFrom >= 0) {
+    yield put(updatePocket({
+      [from]: newValueFrom,
+      [to]: newValueTo,
+    }))
+  }
+
+  yield call(checkExchangeError, ({ amount, from }))
 }
 
 export function* watchExchangeParams() {

@@ -10,4 +10,6 @@ const initialState = currencies.reduce((state, c) => ({
 
 export const getPockets = state => state
 
+export const getCurrentPocket = (state, pocket) => state[pocket] || 0
+
 export default initialState

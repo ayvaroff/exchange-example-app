@@ -78,7 +78,7 @@ class App extends Component {
 const mapStateToProps = state => ({
   pockets: fromPocket.getPockets(state),
   rate: fromRates.getCurrentRate(state),
-  ...fromExchange.getExchange(state),
+  ...fromExchange.getExchangeInfo(state),
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -11,6 +11,7 @@ import {
 import * as api from 'services/rates'
 import {
   requestRates,
+  requestErrorRates,
   updateRates,
   updateCurrentRate,
 } from 'store/actions'
@@ -39,11 +40,15 @@ export function* calculateCurrentRate() {
 }
 
 export function* getLatesRates() {
-  const currencyFrom = yield select(fromExchange.getExchangeFrom)
-  const rates = yield call(requestLatestRates, currencyFrom)
+  try {
+    const currencyFrom = yield select(fromExchange.getExchangeFrom)
+    const rates = yield call(requestLatestRates, currencyFrom)
 
-  yield put(updateRates(rates))
-  yield call(calculateCurrentRate)
+    yield put(updateRates(rates))
+    yield call(calculateCurrentRate)
+  } catch (e) {
+    yield put(requestErrorRates())
+  }
 }
 
 export function* watchGetLatesRates() {

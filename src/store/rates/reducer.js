@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions'
 import {
   requestRates,
+  requestErrorRates,
   updateRates,
   updateCurrentRate,
 } from './actions'
@@ -10,6 +11,10 @@ const reducer = handleActions({
   [requestRates]: (state) => ({
     ...state,
     loading: true,
+  }),
+  [requestErrorRates]: (state) => ({
+    ...state,
+    loading: false,
   }),
   [updateRates]: (state, { payload }) => ({
     ...state,

@@ -7,7 +7,7 @@ const {
   }
 } = config
 
-const apiInstance = axios.create({
+export const apiInstance = axios.create({
   baseURL: baseUrl,
 })
 

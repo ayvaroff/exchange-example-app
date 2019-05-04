@@ -6,6 +6,9 @@
   "env": {
     "production": {
       "plugins": [ "transform-react-remove-prop-types" ]
+    },
+    "test": {
+      "plugins": ["require-context-hook"]
     }
   },
   "plugins": [

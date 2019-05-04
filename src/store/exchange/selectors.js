@@ -5,7 +5,7 @@ const { currencies } = config
 const initialState = {
   amount: 0,
   converted: 0,
-  error: false,
+  error: true,
   from: currencies[0],
   to: currencies[1],
 }

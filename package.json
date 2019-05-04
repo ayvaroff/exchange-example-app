@@ -6,7 +6,16 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --progress --colors",
     "build": "NODE_ENV=production webpack --config webpack/prod.config.js --progress --colors",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "src",
+      "node_modules"
+    ],
+    "setupFiles": [
+      "<rootDir>/test/setup.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -47,8 +56,10 @@
     "@babel/plugin-transform-react-jsx-source": "^7.2.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
+    "axios-mock-adapter": "^1.16.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "babel-plugin-require-context-hook": "^1.0.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "clean-webpack-plugin": "^2.0.1",
     "css-loader": "^2.1.1",
@@ -64,6 +75,7 @@
     "node-sass-glob-importer": "^5.3.1",
     "react-hot-loader": "^4.8.0",
     "redux-devtools-extension": "^2.13.8",
+    "redux-saga-test-plan": "^4.0.0-beta.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",

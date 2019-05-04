@@ -77,7 +77,7 @@ module.exports = merge(baseConfig, {
     }),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, `../${folderName}/index.html`),
-      template: path.resolve(__dirname, '../public/index.html'),
+      template: path.resolve(__dirname, '../public/prod.html'),
     }),
   ],
 })

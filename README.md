@@ -4,7 +4,11 @@ This is a test app for Revolut
 
 ![screenshot](https://user-images.githubusercontent.com/10350182/57172034-7e192a80-6e23-11e9-963c-e12b9951c35c.png)
 
-### Installing
+## App preview link
+
+[App](https://ayvaroff.github.io/exchange-example-app/index.html)
+
+## Installing
 
 To run the application
 

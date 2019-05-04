@@ -2,9 +2,11 @@ const merge = require('webpack-merge')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const globImporter = require('node-sass-glob-importer')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const baseConfig = require('./base.config.js')
 
-const folderName = 'dist'
+const folderName = 'docs'
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -26,10 +28,6 @@ module.exports = merge(baseConfig, {
           use: [
             {
               loader: 'css-loader',
-              options: {
-                minimize: true,
-                sourceMap: true
-              }
             },
             {
               loader: 'sass-loader',
@@ -39,7 +37,8 @@ module.exports = merge(baseConfig, {
                 indentWidth: 1,
                 includePaths: [
                   path.join(__dirname, 'node_modules'),
-                ]
+                ],
+                importer: globImporter(),
               },
             }
           ]
@@ -72,9 +71,13 @@ module.exports = merge(baseConfig, {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin([folderName], { root: path.resolve(__dirname, '..'), verbose: true }),
+    new CleanWebpackPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',
+    }),
+    new HtmlWebpackPlugin({
+      filename: path.resolve(__dirname, `../${folderName}/index.html`),
+      template: path.resolve(__dirname, '../public/index.html'),
     }),
   ],
 })

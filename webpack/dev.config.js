@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const globImporter = require('node-sass-glob-importer');
+const globImporter = require('node-sass-glob-importer')
 const baseConfig = require('./base.config.js')
 
 module.exports = merge(baseConfig, {
@@ -43,7 +43,7 @@ module.exports = merge(baseConfig, {
     ]
   },
   output: {
-    path: `${__dirname}/dist`,
+    path: `${__dirname}/public`,
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -51,7 +51,7 @@ module.exports = merge(baseConfig, {
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
     port: 3000,
     hot: true,
     historyApiFallback: true,

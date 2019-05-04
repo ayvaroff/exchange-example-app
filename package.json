@@ -70,6 +70,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^24.7.1",
     "node-sass": "^4.11.0",
     "node-sass-glob-importer": "^5.3.1",

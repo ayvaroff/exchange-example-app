@@ -6,7 +6,7 @@ This is a test app for Revolut
 
 ## App preview link
 
-[App](https://ayvaroff.github.io/exchange-example-app/index.html)
+<a href="https://ayvaroff.github.io/exchange-example-app/index.html" target="_blank">App</a>
 
 ## Installing
 

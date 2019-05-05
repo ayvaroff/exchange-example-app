@@ -29,7 +29,7 @@ describe('Test loading exchange rates ', () => {
     axiosMock.restore()
   })
 
-  it('with data to store and calculate converted value', () => {
+  it('with data to store', () => {
     axiosMock
       .onGet('/latest')
       .reply(200, { ...payload })
@@ -44,10 +44,6 @@ describe('Test loading exchange rates ', () => {
       .put({
         ...actions.updateRates(),
         payload,
-      })
-      .put({
-        ...actions.updateCurrentRate(),
-        payload: convertedValue
       })
       .run()
   })

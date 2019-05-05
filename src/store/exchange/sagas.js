@@ -12,6 +12,7 @@ import {
   updateExchangeConverted,
   updateExchangeError,
   updatePocket,
+  updateRates,
 } from 'store/actions'
 import {
   fromExchange,
@@ -89,7 +90,7 @@ export function* watchExchangeParams() {
 
 export function* watchRefreshRates() {
   while (true) {
-    const action = yield take([setExchangeTo, updateExchangeAmount])
+    const action = yield take([setExchangeTo, updateExchangeAmount, updateRates])
     yield call(calculateExchangeAmounts, action)
   }
 }

@@ -45,7 +45,6 @@ export function* getLatesRates() {
     const rates = yield call(requestLatestRates, currencyFrom)
 
     yield put(updateRates(rates))
-    yield call(calculateCurrentRate)
   } catch (e) {
     yield put(requestErrorRates())
   }

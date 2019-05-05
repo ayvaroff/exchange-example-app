@@ -11,7 +11,7 @@ const folderName = 'docs'
 module.exports = merge(baseConfig, {
   mode: 'production',
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.[hash].js',
     path: path.resolve(__dirname, `../${folderName}`),
   },
   optimization: {
@@ -73,7 +73,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new CleanWebpackPlugin(),
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: 'style.[hash].css',
     }),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, `../${folderName}/index.html`),

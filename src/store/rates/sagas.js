@@ -18,8 +18,12 @@ import {
 import { convert } from 'utils/currency'
 
 function* requestLatestRates(currency) {
-  const { data } = yield call(api.getLatest, currency)
-  return data
+  try {
+    const { data } = yield call(api.getLatest, currency)
+    return data
+  } catch (e) {
+    throw e
+  }
 }
 
 export function* calculateCurrentRate() {

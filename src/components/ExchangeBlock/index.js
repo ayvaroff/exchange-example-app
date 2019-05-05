@@ -17,6 +17,7 @@ const ExchangeBlock = ({
   onToggleChange,
   pockets,
   rate,
+  ratesError,
 }) => (
   <div className="exchange-block">
     <ExchangeBlockPart
@@ -37,6 +38,7 @@ const ExchangeBlock = ({
       value={converted}
     />
     <ExchangeInfo
+      ratesError={ratesError}
       exchangeFrom={from}
       exchangeTo={to}
       rate={rate}
@@ -48,7 +50,7 @@ const ExchangeBlock = ({
       className="exchange-block-btn"
       onClick={makeConvertion}
       type="button"
-      disabled={error}
+      disabled={error || ratesError}
     >
       Exchange
     </button>
@@ -66,6 +68,7 @@ ExchangeBlock.propTypes = {
   onInputChange: PropTypes.func,
   pockets: PropTypes.object,
   rate: PropTypes.number,
+  ratesError: PropTypes.bool,
 }
 
 export default ExchangeBlock

@@ -77,6 +77,7 @@ class App extends Component {
 const mapStateToProps = state => ({
   pockets: fromPocket.getPockets(state),
   rate: fromRates.getCurrentRate(state),
+  ratesError: fromRates.getRatesStatus(state),
   ...fromExchange.getExchangeInfo(state),
 })
 

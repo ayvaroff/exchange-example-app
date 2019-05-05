@@ -15,12 +15,14 @@ const reducer = handleActions({
   [requestErrorRates]: (state) => ({
     ...state,
     loading: false,
+    loadingError: true,
   }),
   [updateRates]: (state, { payload }) => ({
     ...state,
     base: payload.base,
     rates: payload.rates,
-    loading: false
+    loading: false,
+    loadingError: false,
   }),
   [updateCurrentRate]: (state, { payload }) => ({
     ...state,

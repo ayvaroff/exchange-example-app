@@ -46,8 +46,9 @@ describe('Test loading exchange rates ', () => {
       .withReducer(reducer.default)
       .hasFinalState({
         ...payload,
+        currentRate: 0,
         loading: false,
-        currentRate: 0
+        loadingError: false,
       })
       .run()
   })
@@ -63,8 +64,9 @@ describe('Test loading exchange rates ', () => {
       .hasFinalState({
         base: payload.base,
         rates: {},
+        currentRate: 0,
         loading: false,
-        currentRate: 0
+        loadingError: true,
       })
       .run()
   })

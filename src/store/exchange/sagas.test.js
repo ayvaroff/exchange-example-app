@@ -32,7 +32,9 @@ describe('Test exchnage ', () => {
         USD: 1,
         EUR: 1.23,
         GBP: 1.5,
-      }
+      },
+      loading: false,
+      loadingError: false,
     }
   }
 

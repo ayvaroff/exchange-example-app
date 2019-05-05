@@ -10,12 +10,13 @@ const currencySymbols = {
 const prepareFX = ({
   base,
   rates,
-  loading
+  loading,
+  loadingError,
 }) => {
   fx.base = base
   fx.rates = rates
 
-  return !loading ? fx : null
+  return (!loading && !loadingError) ? fx : null
 }
 
 export const getCurrencySymbol = code => currencySymbols[code] || ''

@@ -51,7 +51,7 @@ describe('Test exchnage ', () => {
       from: state.exchange.from,
       to: state.exchange.to,
     })
-      .withState({ ...state })
+      .withState(state)
       .put({
         ...actions.updateExchangeError(),
         payload: false,
@@ -65,7 +65,7 @@ describe('Test exchnage ', () => {
       from: state.exchange.from,
       to: state.exchange.from,
     })
-      .withState({ ...state })
+      .withState(state)
       .put({
         ...actions.updateExchangeError(),
         payload: true,
@@ -75,7 +75,7 @@ describe('Test exchnage ', () => {
 
   it('with calculate amounts', () => {
     return expectSaga(sagas.calculateExchangeAmounts)
-      .withState({ ...state })
+      .withState(state)
       .put({
         ...actions.updateExchangeConverted(),
         payload: convertedValue,
@@ -90,7 +90,7 @@ describe('Test exchnage ', () => {
 
   it('with refresh rates', () => {
     return expectSaga(sagas.refreshRates)
-      .withState({ ...state })
+      .withState(state)
       .call(ratesSagas.getLatesRates)
       .call(sagas.calculateExchangeAmounts)
       .run()
@@ -98,7 +98,7 @@ describe('Test exchnage ', () => {
 
   it('with conversion', () => {
     return expectSaga(sagas.makeValuesConvertion)
-      .withState({ ...state })
+      .withState(state)
       .put({
         ...pocketActions.updatePocket(),
         payload: {

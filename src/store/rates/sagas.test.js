@@ -2,6 +2,7 @@ import { expectSaga } from 'redux-saga-test-plan'
 import MockAdapter from 'axios-mock-adapter'
 import { apiInstance } from 'utils/api'
 
+import * as reducer from './reducer'
 import * as actions from './actions'
 import * as sagas from './sagas'
 
@@ -10,7 +11,6 @@ jest.mock('money')
 describe('Test loading exchange rates ', () => {
   let axiosMock
 
-  const convertedValue = 123
   const payload = {
     base: 'USD',
     rates: {
@@ -22,7 +22,6 @@ describe('Test loading exchange rates ', () => {
 
   beforeEach(() => {
     axiosMock = new MockAdapter(apiInstance)
-    require('money').convert.mockReturnValue(convertedValue)
   })
 
   afterAll(() => {
@@ -39,11 +38,16 @@ describe('Test loading exchange rates ', () => {
         exchange: {
           from: 'USD',
         },
-        rates: payload
       })
       .put({
         ...actions.updateRates(),
         payload,
+      })
+      .withReducer(reducer.default)
+      .hasFinalState({
+        ...payload,
+        loading: false,
+        currentRate: 0
       })
       .run()
   })
@@ -54,6 +58,13 @@ describe('Test loading exchange rates ', () => {
     expectSaga(sagas.getLatesRates)
       .put({
         ...actions.requestErrorRates()
+      })
+      .withReducer(reducer.default)
+      .hasFinalState({
+        base: payload.base,
+        rates: {},
+        loading: false,
+        currentRate: 0
       })
       .run()
   })
